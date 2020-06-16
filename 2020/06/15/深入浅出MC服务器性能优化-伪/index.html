@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Archive: 2020/6</title>
+    <title>深入浅出MC服务器性能优化(伪 - Sinkalex的小窝</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Sinkalex,"> 
-    
+    <meta name="description" content="前言作为一名MC开服佬，一直被mc的单线程“特性”所困扰，我尝试过许多优化方法，包括但不限于使用waterfall划分子服、分世界设置视距、合并/限制生物、修改mod中机器的运算频率等（有空的话会写,"> 
     <meta name="author" content="Sinkalex"> 
     <link rel="alternative" href="atom.xml" title="Sinkalex的小窝" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -33,39 +33,64 @@
 <body class="loading">
     <span id="config-title" style="display:none">Sinkalex的小窝</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                    <div class="timeline">
-                      <h2 class="timeline-title">归档: 2篇</h2><hr>
-                      
-                      
-                        
-                          <h3 class="timeline-subtitle">2020</h3>
-                        
-                        <div class="timeline-item">
-                          <time>2020-06-15</time>
-                          <a target="_self" href="/2020/06/15/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAMC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E4%BC%AA/">深入浅出MC服务器性能优化(伪</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2020-06-13</time>
-                          <a target="_self" href="/2020/06/13/Hello-World/">HelloWorld</a>
-                        </div>
-                      
-                    </div>
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.sinkalex.me"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">深入浅出MC服务器性能优化(伪</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">深入浅出MC服务器性能优化(伪</h1>
+        <div class="stuff">
+            <span>六月 15, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Minecraft/" rel="tag">Minecraft</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>作为一名MC开服佬，一直被mc的单线程“特性”所困扰，我尝试过许多优化方法，包括但不限于使用waterfall划分子服、分世界设置视距、合并/限制生物、修改mod中机器的运算频率等（有空的话会写写），结果人一多（30人同时在线），TPS该掉还是会掉。。。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>解决提出问题的人！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PlayerChatListener</span> <span class="keyword">implements</span> <span class="title">Listener</span> </span>&#123;</span><br><span class="line">    <span class="meta">@EventHandler</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTalk</span><span class="params">(AsyncPlayerChatEvent e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (e.getMessage().toLowerCase().contains(<span class="string">"卡"</span>)||e.getMessage().toLowerCase().contains(<span class="string">"ka"</span>)) &#123;</span><br><span class="line">            e.setCancelled(<span class="keyword">true</span>);</span><br><span class="line">            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),<span class="string">"kick "</span>+e.getPlayer().getName()+<span class="string">" §4§l你因疑似怀疑服务器的性能而被请出服务器！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://music.163.com/song/media/outer/url?id=1321424485.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 
